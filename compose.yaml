@@ -82,7 +82,7 @@ services:
     <<: *runner
     build: { context: ., dockerfile: docker/ruby.Dockerfile }
     image: mongodb-practice/ruby
-
+    entrypoint: ["bash", "-c", "bundle config set --local path 'vendor/bundle' && bundle install --gemfile=infra/ruby/Gemfile --quiet && exec run \"$$@\"", "--"]
   go:
     <<: *runner
     build: { context: ., dockerfile: docker/go.Dockerfile }
